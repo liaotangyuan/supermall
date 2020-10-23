@@ -34,7 +34,7 @@ import Scroll from "components/common/scroll/Scroll";
 import BackTop from "components/content/backTop/BackTop"
 
 import {getHomeMultidata,getHomeGoods} from "network/home";
-import {debounce} from 'common/utils'
+import {itemListenerMixin} from "common/mixin"
 
 
 export default {
@@ -49,6 +49,7 @@ export default {
     Scroll,
     BackTop
   },
+  mixins: [itemListenerMixin],
   data() {
     return {
       banners: [],
@@ -62,7 +63,7 @@ export default {
       isShowBackTop: false,
       tabOffsetTop: 0,
       isTabFixed: false,
-      saveY: 0
+      saveY: 0,
     }
   },
   computed: { //计算属性
@@ -76,8 +77,11 @@ export default {
     // console.log(this.saveY);
   },
   deactivated() { //当用户离开此界面时保持当前界面的滚动条位置
+    // 1.保存Y值
     this.saveY = this.$refs.scroll.getScrollY()
     // console.log(this.saveY);
+    // 2.取消全局事件的监听
+    this.$bus.$off('itemImgLoad', this.itemImgListener)
   },
   created() { //创建生命周期函数使得界面一旦创建完成便发送网络请求获取数据
     //这里只需要调用，具体的实现交给methods去做
@@ -89,20 +93,13 @@ export default {
     this.getHomeGoods('sell')
   },
   mounted() {
-    // 1.将图片加载完后调用刷新界面的函数传入防抖动函数中
-    //监听item中图片加载完成发出的itemImageLoad事件
-    const refresh = debounce(this.$refs.scroll.refresh,200)
-    //监听图片加载完成再调用refresh函数刷新scroll保存的子组件高度即可
-    this.$bus.$on('itemImageLoad', () => {
-      refresh()
-    })
-
+    //注意：这里面不是没有内容而是内容因为要代码复用所以放到了混入工具mixin中
   },
   methods: {
     /**
      * 事件监听相关的方法
      */
-
+    //将首页中的两个tab-control标签的状态同步，实现内容与样式的统一
     tabClick(index) {
       switch (index) {
         case 0:

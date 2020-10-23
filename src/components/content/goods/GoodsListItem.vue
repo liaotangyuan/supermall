@@ -1,6 +1,6 @@
 <template>
-  <div class="goods-item">
-    <img :src="goodsItem.show.img" alt="" @load="imageLoad">
+  <div class="goods-item" @click="itemClick">
+    <img :src="showImage" alt="" @load="imageLoad">
     <div class="goods-info">
       <p>{{goodsItem.title}}</p>
       <span class="prive">{{goodsItem.price}}</span>
@@ -21,9 +21,18 @@ export default {
       }
     }
   },
+  computed: {
+    showImage() {
+      return this.goodsItem.image || this.goodsItem.show.img;
+    }
+  },
   methods: {
     imageLoad() {
+      //注意此函数只有首页需要监听，而在详情页是不需要的
       this.$bus.$emit('itemImageLoad')
+    },
+    itemClick() {
+      this.$router.push('detail' + this.goodsItem.iid)
     }
   }
 }
