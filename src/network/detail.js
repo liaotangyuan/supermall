@@ -14,7 +14,7 @@ export class Goods {
   constructor(itemInof, columns, services) {
     this.title = itemInof.title
     this.desc = itemInof.desc
-    this.newPrice = itemInof.price
+    this.newPrice = itemInof.lowNowPrice
     this.oldPrice = itemInof.oldPrice
     this.discount = itemInof.discount
     this.columns = columns
