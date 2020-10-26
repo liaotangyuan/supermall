@@ -189,7 +189,7 @@ export default {
     overflow: hidden;
     position: absolute; /*绝对定位：相对于父元素的定位*/
     top: 44px;
-    bottom: 49px;
+    bottom: 58px;
     left: 0;
     right: 0;
   }

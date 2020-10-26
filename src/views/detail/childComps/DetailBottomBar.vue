@@ -62,25 +62,25 @@ export default {
 
   .bar-left .icon {
     display: block;
-    width: 22px;
-    height: 22px;
-    margin: 6px auto 3px;
+    width: 20px;
+    height: 20px;
+    margin: 5px auto 0;
     background: url("~assets/img/detail/detail_bottom.png");
     background-size: 100%;
   }
 
   .bar-left .service {
-    background-position: 0 -54px;
+    background-position: 0 -48px;
   }
 
   .bar-left .shop {
-    background-position: 0 -98px;
+    background-position: 0 -90px;
   }
 
   .bar-right {
     font-size: 15px;
     color: #fff;
-    line-height: 58px;
+    line-height: 44px;
   }
 
   .bar-right .cart {
