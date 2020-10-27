@@ -1,4 +1,6 @@
-# supermall1
+Hi, welcome to visit here, like it can be downloaded to use oh
+# supermall
+This is a mobile terminal shopping mall project based on Vue, which contains a variety of function implementation schemes and annotation analysis. You can download and use it if you like. If it is useful to you, I feel honored
 
 ## Project setup
 ```
